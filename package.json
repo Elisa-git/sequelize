@@ -4,12 +4,20 @@
   "description": "",
   "main": "./api/index.js",
   "scripts": {
+    "start": "nodemon ./api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mesquita",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mysql2": "^2.3.3",
+    "path": "^0.12.7",
+    "sequelize": "^6.12.2",
+    "sequelize-cli": "^6.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
