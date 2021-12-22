@@ -21,23 +21,23 @@ Passo 3
 
 ****
 
-const express = require('express');
-const bodyParser = require('body-parser');
+  const express = require('express');
+  const bodyParser = require('body-parser');
 
-const app = express();
+  const app = express();
 
-app.use(bodyParser.json());
+  app.use(bodyParser.json());
 
-const port = 3000;
+  const port = 3000;
 
-app.get('/teste', (req, res) => res
-    .status(200)
-    .send({mensagem: 'Deu certo!'})
-);
+  app.get('/teste', (req, res) => res
+      .status(200)
+      .send({mensagem: 'Deu certo!'})
+  );
 
-app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
+  app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
 
-module.exports = app;
+  module.exports = app;
 
 ****
 
@@ -48,8 +48,8 @@ Passo 4
 
 ****
 
-"scripts": {
-    "start": "nodemon ./api/index.js",
+  "scripts": {
+      "start": "nodemon ./api/index.js",
 
 ****
 
@@ -63,13 +63,20 @@ Passo 5
 
 ****
 
-const path = require('path');
+  const path = require('path');
 
-module.exports = {
-  'config': path.resolve('./api/config', 'config.json'),
-  'models-path': path.resolve('./api/models'),
-  'seeders-path': path.resolve('./api/seeders'),
-  'migrations-path': path.resolve('./api/migrations')
-}
+  module.exports = {
+    'config': path.resolve('./api/config', 'config.json'),
+    'models-path': path.resolve('./api/models'),
+    'seeders-path': path.resolve('./api/seeders'),
+    'migrations-path': path.resolve('./api/migrations')
+  }
 
 ****
+
+Passo 6
+
+ - Conectar com o banco através do terminal
+ - Criar database "create database nome;"
+ - Informar ao programa a existência da database criada. Ao instalar o sequelize, uma das pastas criadas foi a config. 
+   - Acesse o arquivo config.json e na parte de desenvolvimento adeque os parâmetros indicados aos parâmetros do banco.
