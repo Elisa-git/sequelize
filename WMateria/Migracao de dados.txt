@@ -1,0 +1,89 @@
+Migração de dados (transferência de dados entre plataformas)
+
+ - Migração com ORM: Alterações feitas no banco. Alterações são rastreáveis e reversíveis.
+
+Sequelize costuma pluralizar o nome das tabelas, dessa forma, já cadastre no plural para não haver problemas na conversão automática do mesmo.
+Para impedir esse comportamento:
+ - a função freezeTableName pode ser usada.
+Ex.:
+    sequelize.define('User', {}, {
+        freezeTableName: true
+    });
+
+ - o nome da tabela pode ser definido manualmente.
+Ex.:
+    sequelize.define('User', {}, {
+        tablaName: 'Employees'
+    });
+
+
+Passo 1
+
+ - Criar tabelas através do terminal.
+
+****
+
+    npx sequelize-cli model:create --name Pessoas --attributes nome:string,ativo:boolean,email:string,role:string
+
+****
+ 
+ - Migração de dados.
+
+****
+
+    npx sequelize-cli db:migrate 
+
+****
+
+ - Selecionar a database
+
+****
+
+    use nomeDatabase;
+    show tables; (mostra as tabelas da database)
+    describe nomeTabela; (mostra os atributos da tabela;)
+
+****
+
+Passo 2
+
+ - Utilizar o seed para popular o banco. Dessa forma, crie um arquivo (através do terminal) "demo-pessoa"
+
+****
+
+    npx sequelize-cli seed:generate --name demos-pessoa
+
+****
+
+ - Um arquivo será criado com as funções up e down. Sendo assim, altere as informações de acordo com os dados do seu banco e popule-o inserindo os atributos e suas informações.
+
+****
+
+    up: async (queryInterface, Sequelize) => {
+        await queryInterface.bulkInsert('Pessoas', [
+        {
+            nome: "Ana Victoria Santos",
+            ativo: true,
+            email: "ana.victoria@email.com",
+            role: "estudante",
+            createdAt: new Date(),
+            updateAt: new Date()
+        }
+        ], {}
+    );
+
+****
+
+ - Rodar o comando para o sequelize conectar com o banco e enviar as informações inseridas.
+
+****
+
+    npx sequelize-cli db:seed:all;
+    npx sequelize-cli db:migrate:undo; (Desfaz a última migração feita)
+    npx sequelize-cli db:migrate:undo --name [data-hora]-create-[nome-tabela].js; (Desfaz migração de forma mais específica)
+
+    npx sequelize-cli db:seed:undo; (Desfaz a última seed)
+    npx sequelize-cli db:seed:undo --seed nomeArquivo; (Desfaz uma tabela mais específica)
+    npx sequelize-cli db:seed:undo:all; (Desfaz todos os seeds feitos)
+
+****
