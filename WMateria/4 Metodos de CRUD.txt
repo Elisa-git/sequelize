@@ -17,4 +17,21 @@ Passo 1
 Passo 2
 
  - Avisar no arquivo de notas da classe que há uma nova rota.
- - Criar rota get com o parâmetro indicado em sua url
+ - Criar um get o parâmetro rota deve ter /:id para indicar que ela receberá um id
+
+C - Create
+
+Criar registros:
+
+Passo 1
+
+ - Fazer uma função statica e assíncrona que terá como parâmetros req e res
+ - Criar uma const que vai receber req.body (as informações no corpo da requisição)
+ - Fazer um try com uma const que guardará o resultado do que foi criado no banco (create), mostrará uma mensagem de sucesso e as informações inseridas.
+  - O create vai fazer um novo registro baseado na informação passada no req.body  
+ - Fazer um cath tendo error como parâmetro, para caso o try dê errado
+
+Passo 2
+
+ - Avisar no arquivo de notas da classe que há uma nova rota.
+ - Criar uma rota post tendo como parâmetro a rota e a função.
