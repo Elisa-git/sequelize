@@ -15,7 +15,7 @@ Passo 3
  - Criar a const app para inicializar o express. Através dela serão declarados os métodos.
  - Criar o método use que terá como parâmetro o bodyParser e o json, indicando que o body-parser pegará as resquisições que chegar e converter para json.
  - Declarar como constante a porta 3000.
- - Declarar um método getr de teste que retornará uma mensagem caso a conexão dê certo.
+ - Declarar um método get de teste que retornará uma mensagem caso a conexão dê certo.
  - Declarar um listen para ele analisar o status do servidor, ele terá como parâmetro a porta e um parâmetro vazio que retornará uma mensagem caso esteja tudo ok.
  - Exportar o app para que ele se disponibilize para a aplicação.
 
@@ -35,7 +35,7 @@ Passo 3
       .send({mensagem: 'Deu certo!'})
   );
 
-  app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
+  app.listen(port, () => console.lnpxog(`Servidor rodando na porta ${port}`));
 
   module.exports = app;
 
@@ -49,7 +49,7 @@ Passo 4
 ****
 
   "scripts": {
-      "start": "nodemon ./api/index.js",
+    "start": "nodemon ./api/index.js",
 
 ****
 

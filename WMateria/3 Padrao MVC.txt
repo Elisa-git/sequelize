@@ -24,7 +24,7 @@ Passo 1 - Criar um controlador
  - Importar o index de modelos
  - Criar classe
  - Fazer uma função statica e assíncrona que terá como parâmetros req e res
- - Fazer um try com uma const que guardará o resultado do que foi buscado no banco e mostrará uma mensagem de sucesso
+ - Fazer um try com uma const que guardará o resultado do que foi buscado no banco e mostrará uma mensagem de sucesso (findAll)
  - Fazer um cath tendo error como parâmetro, para caso o try dê errado
  - Exportar a classe.
 
@@ -53,4 +53,80 @@ Passo 1 - Criar um controlador
 Passo 2 - Organizar rotas
 
  - Criar diretório de rotas e arquivo index.js que será o ponto de entrada das rotas
- - 
+ No index de routes:
+ - Declarar como const o body-parser
+ - Exportar a função que terá app como parâmetro e chamará o app.use e app.get (que estavam na index original. Dessa forma, tudo que for passado para a nova index, será apagado da original).
+ No indext original:
+ - Tirar o body-parser
+ - Criar uma nova const que chame a index de routes
+ - Chamar o método routes tendo app como parâmetro
+
+****
+
+INDEX ORIGINAL
+
+    const express = require('express');
+    const bodyParser = require('body-parser');
+    const routes = require('./routes');
+
+    const app = express();
+    const port = 3000;
+
+    routes(app);
+
+    app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
+
+    module.exports = app;
+
+INDEX DE ROUTES
+
+    const bodyParser = require('body-parser');
+
+    module.exports = app => {
+        app.use(bodyParser.json());
+        
+        app.get('/', (req, res) => {            //Rota de teste
+            res.send('Dentro da rota :)');
+        });
+    }
+
+****
+
+Passo 3 - Definir rotas
+
+ - Criar um arquivo com o nome da rota 'pessoasRoute'
+ - Importar a classe PessoaController, a ferramenta Router do express através da const
+ - Criar uma constante router que chame o método Router do express.
+ - Criar uma rota que tenha como função pegar todas as pessoas.
+  - A rota terá como parâmetro a rota /pessoas, a função criada em PessoaController
+ - Exportar router
+No Index do Routes
+ - Adicionar a const pessoas para informar ao index de gerenciamento de rotas que existe uma rota pessoasRoute
+ - Adicionar Dentro do método o app.use(pessoas)
+ - Apagar a rota de teste
+
+
+****
+
+PESSOASROUTE
+
+    const { Router } = require("express");
+    const PessoaController = require('../controllers/PessoaCont')
+
+    const router = Router()
+
+    router.get('/pessoas', PessoaController.pegaAllRegistrosPessoas);
+
+    module.exports = router;
+
+INDEX ROUTES
+
+    const bodyParser = require('body-parser');
+    const pessoas = require('./pessoasRoute');
+
+    module.exports = app => {
+        app.use(bodyParser.json());
+        app.use(pessoas);
+    }   
+
+****

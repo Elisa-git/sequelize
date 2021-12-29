@@ -1,0 +1,20 @@
+R - Read
+
+Pegar todos os resultados: 
+ - Find all
+
+
+Pegar um resultado específico:
+
+Passo 1 
+
+ - Fazer uma função statica e assíncrona que terá como parâmetros req e res
+ - Criar uma const que indique o id passado para o sequelize, essa const vai receber params.
+ - Fazer um try com uma const que guardará o resultado do que foi buscado no banco e mostrará uma mensagem de sucesso (findOne). 
+  - Esse findOnde tem como parâmetro o where que indica que retornará uma resposta somente se o id solicitado for igual ao encontrado.
+ - Fazer um cath tendo error como parâmetro, para caso o try dê errado
+
+Passo 2
+
+ - Avisar no arquivo de notas da classe que há uma nova rota.
+ - Criar rota get com o parâmetro indicado em sua url
