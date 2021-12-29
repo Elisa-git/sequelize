@@ -6,5 +6,6 @@ const router = Router();
 router.get('/pessoas', PessoaCont.pegaAllRegistrosPessoas);
 router.get('/pessoas/:id', PessoaCont.pegaUmRegistroPessoa);
 router.post('/pessoas', PessoaCont.criaPessoa);
+router.put('/pessoas/:id', PessoaCont.atualizaPessoa);
 
 module.exports = router;

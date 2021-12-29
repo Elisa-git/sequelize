@@ -35,3 +35,27 @@ Passo 2
 
  - Avisar no arquivo de notas da classe que há uma nova rota.
  - Criar uma rota post tendo como parâmetro a rota e a função.
+
+U - Update
+
+Atualizar registros:
+
+Passo 1
+
+ - Fazer uma função statica e assíncrona que terá como parâmetros req e res
+ - Criar uma const que vai receber req.body (as informações no corpo da requisição)
+ - Criar uma const que indique o id passado para o sequelize, essa const vai receber params.
+ - Fazer um try que guardará o resultado do que será atualizado no banco (update).
+  - O update receberá como parâmetros a const que recebeu as informações passadas no req.body e o where que indica que retornará uma resposta somente se o id solicitado for igual ao encontrado.
+  - O update só recebe como resposta 0 ou 1. Dessa forma, para receber um retorno é necessário criar uma const com findOne que retornará os dados atualizados.
+ - Fazer um cath tendo error como parâmetro, para caso o try dê errado 
+
+Passo 2
+
+D - Delete
+
+Excluir registros:
+
+Passo 1
+
+Passo 2
