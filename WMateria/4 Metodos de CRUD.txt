@@ -52,10 +52,19 @@ Passo 1
 
 Passo 2
 
+ - Avisar no arquivo de notas da classe que há uma nova rota.
+ - Criar uma rota put o parâmetro rota deve ter /:id para indicar que ela receberá um id
+
 D - Delete
 
 Excluir registros:
 
 Passo 1
+
+ - Fazer uma função statica e assíncrona que terá como parâmetros req e res
+ - Criar uma const que indique o id passado para o sequelize, essa const vai receber params.
+ - Fazer um try que guardará o resultado do que será excluido do banco (destroy).
+  - O destroy receberá como parâmetro o where que indica que o dado será apagado somente se o id solicitado for igual ao encontrado.
+ - Fazer um cath tendo error como parâmetro, para caso o try dê errado 
 
 Passo 2

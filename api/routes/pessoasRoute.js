@@ -7,5 +7,6 @@ router.get('/pessoas', PessoaCont.pegaAllRegistrosPessoas);
 router.get('/pessoas/:id', PessoaCont.pegaUmRegistroPessoa);
 router.post('/pessoas', PessoaCont.criaPessoa);
 router.put('/pessoas/:id', PessoaCont.atualizaPessoa);
+router.delete('/pessoas/:id', PessoaCont.deletaPessoa);
 
 module.exports = router;
