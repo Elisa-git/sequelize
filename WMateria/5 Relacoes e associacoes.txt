@@ -1,0 +1,73 @@
+Criando tabelas
+
+ - Escolha as tabelas com menos chaves estrangeiras para iniciar a criação
+ - Determine como atributo apenas os atributos nativos da tabela e não os fk e pk
+
+Associações
+
+As associações são declaradas no arquivo da tabela em models.
+É preciso levar em consideração o conceito de um para muitos, um para um e muitos para muitos.
+
+Um para vários (hasMany - belongsTo)
+
+Passo 1
+
+ - hasMany
+
+    TabelaAtual.hasMany(models.Tabela, {
+        foreignKey: 'nomeChaveEstrangeira'
+    })
+    Ex.: Uma pessoa pode ter muitas matrículas
+    Pessoas.hasMany(models.Matriculas, {
+        foreignKey: 'estudante_id'
+    })
+
+Passo 2
+
+ - belongsTo
+
+    TabelaAtual.belongsTo(models.Tabela);
+    Ex.:
+    Turmas.belongsTo(models.Pessoas);
+
+Passo 3
+
+Associar nas migrações em qual das colunas as fk serão adicionadas
+ - Isso será feito através da foreignKey, dessa forma é só ir no belongsTo e adicionar a relação referenciando o nome da coluna que será usada
+
+****
+
+    Matriculas.belongsTo(models.Turmas, {
+            foreignKey: 'turma_id'
+        });
+
+****
+
+Passo 4
+
+Referenciar nos arquivos de migração quais as colunas que receberão chaves estrangeiras 
+ - Isso será feito adicionando a coluna como propriedade de create table.
+ - No arquivo da tabela na pasta de migrações adicione o atributo tendo como título o nome da foreignKey, ele terá como parâmetros:
+  - Não permitir ser nulo
+  - O tipo de dado
+  - O modelo referenciado, nele deve-se abrir o objeto e colocar as propriedades modelo (tabela a qual a fk pertence) e a chave (a coluna usada como chave)
+
+****
+
+    docente_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Pessoas', key: 'id'}
+    }
+
+**** 
+
+Passo 5
+ 
+ - Rodar as migrações no terminal 
+
+****
+
+    npx sequelize-cli db:migrate
+
+****
