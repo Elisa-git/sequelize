@@ -6,5 +6,8 @@ const router = Router()
 router
     .get('/turmas', TurmaCont.pegaAllRegistrosTurmas)
     .get('/turmas/:id', TurmaCont.pegaUmRegistroTurma)
+    .post('/turmas/:id', TurmaCont.criaTurma)
+    .put('/turmas/:id', TurmaCont.atualizaTurma)
+    .delete('/turmas/:id', TurmaCont.deletaTurma)
 
 module.exports = router;

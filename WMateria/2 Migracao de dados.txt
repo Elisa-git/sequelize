@@ -78,7 +78,8 @@ Passo 2
 
 ****
 
-     npx sequelize-cli db:migrate:undo; (Desfaz a última migração feita)
+    npx sequelize-cli db:seed:all;
+    npx sequelize-cli db:migrate:undo; (Desfaz a última migração feita)
     npx sequelize-cli db:migrate:undo --name [data-hora]-create-[nome-tabela].js; (Desfaz migração de forma mais específica)
 
     npx sequelize-cli db:seed:undo; (Desfaz a última seed)

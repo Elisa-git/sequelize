@@ -19,6 +19,29 @@ Passo 2
  - Avisar no arquivo de notas da classe que há uma nova rota.
  - Criar um get o parâmetro rota deve ter /:id para indicar que ela receberá um id
 
+****
+
+    static async pegaUmRegistroPessoa(req, res) {
+        const { id } = req.params;
+        try {               // os parâmetros devem entrar em forma de objeto, por isso o {}
+        
+            const umaPessoa = await database.Pessoas.findOne({
+                where: {
+                    id: Number(id) 
+                }
+            });
+        
+            return res.status(200).json(umaPessoa);
+        
+        } catch (error) {
+        
+            return res.status(500).json(error.message);
+        
+        }
+    }
+
+****
+
 C - Create
 
 Criar registros:
@@ -35,6 +58,24 @@ Passo 2
 
  - Avisar no arquivo de notas da classe que há uma nova rota.
  - Criar uma rota post tendo como parâmetro a rota e a função.
+
+****
+
+    static async criaPessoa(req, res) {
+        const novaPessoa = req.body;
+        try {
+
+            const novaPessoaCriada = await database.Pessoas.create(novaPessoa);
+            return res.status(200).json(novaPessoaCriada);
+
+        } catch (error) {
+
+            return res.status(500).json(error.message);
+
+        }
+    }
+
+****
 
 U - Update
 
@@ -55,6 +96,35 @@ Passo 2
  - Avisar no arquivo de notas da classe que há uma nova rota.
  - Criar uma rota put o parâmetro rota deve ter /:id para indicar que ela receberá um id
 
+
+****
+
+    static async atualizaPessoa(req, res) {
+        const { id } = req.params;
+        const novaInfo = req.body;
+        try {
+        
+            await database.Pessoas.update(novaInfo, {
+                where: {
+                    id: Number(id)
+                }
+            });
+            const pessoaAtualizada = await database.Pessoas.findOne( {
+                where: {
+                    id: Number(id)
+                }
+            });
+            return res.status(200).json(pessoaAtualizada);
+        
+        } catch (error) {
+
+            return res.status(500).json(error.message);
+
+        }
+    }
+
+****
+
 D - Delete
 
 Excluir registros:
@@ -68,3 +138,27 @@ Passo 1
  - Fazer um cath tendo error como parâmetro, para caso o try dê errado 
 
 Passo 2
+
+ - Avisar no arquivo de notas da classe que há uma nova rota.
+ - Criar uma rota delete o parâmetro rota deve ter /:id para indicar que ela receberá um id
+
+****
+
+    static async deletaPessoa(req, res) {
+        const { id } = req.params;
+        try {
+            
+            await database.Pessoas.destroy({
+                where: {
+                    id: Number(id)
+                }
+            });
+            return res.status(200).json({ mensagem: `id ${id} deletado com sucesso!`});
+        } catch (error) {
+
+            return res.status(500).json(error.message);
+
+        }
+    }
+
+****

@@ -20,7 +20,7 @@ Assim, quando quiser visualizar um json com todos os cadastros (exemplo), a requ
 Passo 1 - Criar um controlador
 
  - Criar um diretório de nome controller.
- - Criar um arquivo para abrigar o controler dos moodelos criados.
+ - Criar um arquivo para abrigar o controler dos modelos criados.
  - Importar o index de modelos
  - Criar classe
  - Fazer uma função statica e assíncrona que terá como parâmetros req e res

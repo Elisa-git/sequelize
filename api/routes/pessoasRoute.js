@@ -10,3 +10,5 @@ router.put('/pessoas/:id', PessoaCont.atualizaPessoa);
 router.delete('/pessoas/:id', PessoaCont.deletaPessoa);
 
 module.exports = router;
+
+
