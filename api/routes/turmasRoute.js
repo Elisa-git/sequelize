@@ -6,7 +6,7 @@ const router = Router()
 router
     .get('/turmas', TurmaCont.pegaAllRegistrosTurmas)
     .get('/turmas/:id', TurmaCont.pegaUmRegistroTurma)
-    .post('/turmas/:id', TurmaCont.criaTurma)
+    .post('/turmas', TurmaCont.criaTurma)
     .put('/turmas/:id', TurmaCont.atualizaTurma)
     .delete('/turmas/:id', TurmaCont.deletaTurma)
 

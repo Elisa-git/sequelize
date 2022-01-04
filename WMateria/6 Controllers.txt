@@ -1,0 +1,95 @@
+Matrícula está vinculado com estudante e, por isso, para pegar a matrícula de um estudante é um pouco mais difícil. Dessa forma, a função que retorna uma matrícula será feota no controller de Pessoas.
+
+Pegar um resultado específico:
+
+Passo 1
+
+ - Fazer uma função statica e assíncrona que terá como parâmetros req e res
+ - Criar uma const que receba o id de matricula e de estudante passado para o sequelize, essa const vai receber params.
+ - Fazer um try com uma const que guardará o resultado do que foi buscado no banco e mostrará uma mensagem de sucesso (findOne). 
+  - Esse findOnde tem como parâmetro o where que indica que retornará uma resposta somente se o id solicitado for igual ao id da matrícula e se a coluna estudante_id for igual a estudanteId (variável declarada inicialmente).
+ - Fazer um cath tendo error como parâmetro, para caso o try dê errado
+
+Passo 2
+
+ - Avisar no arquivo de notas da classe que há uma nova rota.
+ - Criar um get o parâmetro rota deve ter /pessoas/:estudanteId/matricula/:matriculaId para indicar que ela receberá Ids
+
+****
+
+    static async pegaUmaMatricula(req, res) {
+        const { estudanteId, matriculaId } = req.params;
+        try {
+            const umaMatricula = await database.Matriculas.findOne({
+                where: {
+                    id: Number(matriculaId),
+                    estudante_id: Number(estudanteId)
+                }
+            });
+            return res.status(200).json(umaMatricula);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+ROTA
+
+    .get('/pessoas/:estudanteId/matricula/:matriculaId', PessoaCont.pegaUmaMatricula)
+
+****
+
+Criar
+
+Passo 1
+
+ - Fazer uma função statica e assíncrona que terá como parâmetros req e res
+ - Criar uma const que receba o id passado para o sequelize, essa const vai receber params.
+ - Criar uma const que vai receber req.body (as informações no corpo da requisição) e o id.
+  - Será utilizado o conceito de spread que vai selecionar todas as informações do body.
+ - Fazer um try com uma const que guardará o resultado do que foi criado no banco (create), mostrará uma mensagem de sucesso e as informações inseridas.
+  - O create vai fazer um novo registro baseado na informação passada no req.body  
+ - Fazer um cath tendo error como parâmetro, para caso o try dê errado
+
+Passo 2
+
+ - Avisar no arquivo de notas da classe que há uma nova rota.
+ - Criar uma rota post tendo como parâmetro o id do estudante e a matricula.
+
+****
+
+    static async criaMatricula(req, res) {
+        const { estudanteId } = req.params;
+        const novaMatricula = { ...req.body, estudante_id: Number(estudanteId) }
+        try {
+            const novaMatriculaCriada = await database.Matriculas.create(novaMatricula)
+            return res.status(200).json(novaMatriculaCriada);
+        } catch (error) {
+            return res.status(500).json(error.message);
+        }
+    }
+
+ROTA
+    .post('/pessoas/:estudanteId/matricula', PessoaCont.criaMatricula)
+
+****
+
+Atualizar
+
+Passo 1
+
+ - Fazer uma função statica e assíncrona que terá como parâmetros req e res
+ - Criar uma const que receba os ids passados para o sequelize, essa const vai receber params.
+ - Criar uma const que vai receber o body (as informações no corpo da requisição).
+ - Fazer um try com uma const que guardará o resultado do que foi atualizado no banco (update), mostrará uma mensagem de sucesso e as informações inseridas.
+  - O update vai fazer um novo registro baseado na informação passada no req.body
+  - O update só recebe como resposta 0 ou 1. Dessa forma, para receber um retorno é necessário criar uma const com findOne que retornará os dados atualizados.
+ - Fazer um cath tendo error como parâmetro, para caso o try dê errado
+
+Passo 2
+
+ - Avisar no arquivo de notas da classe que há uma nova rota.
+ - Criar uma rota post tendo como parâmetro o id do estudante e a matricula.
+
+
+
+Deletar
